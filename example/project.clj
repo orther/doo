@@ -18,7 +18,7 @@
   :doo {:build "test"
         :paths {:slimer "./node_modules/.bin/slimerjs"}
         :alias {:browsers [:chrome :firefox]
-                :all [:browsers :headless]}}
+                :all [:browsers :headless :electron]}}
 
   :jvm-opts ["-Xmx1g"]
 
