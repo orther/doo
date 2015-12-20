@@ -24,7 +24,9 @@
    :opera         {:plugin (karma-plugin-name "opera")
                    :name   "Opera"}
    :ie            {:plugin (karma-plugin-name "ie")
-                   :name   "IE"}})
+                   :name   "IE"}
+   :electron      {:plugin (karma-plugin-name "electron")
+                   :name   "Electron"}})
 
 (def envs (set (keys browser-envs)))
 
