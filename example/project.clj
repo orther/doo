@@ -18,7 +18,8 @@
   :doo {:build "test"
         :paths {:slimer "./node_modules/.bin/slimerjs"}
         :alias {:browsers [:chrome :firefox]
-                :all [:browsers :headless :electron]}}
+                :all [:browsers :headless :electron]}
+        :debug true}
 
   :jvm-opts ["-Xmx1g"]
 
@@ -50,6 +51,10 @@
                                                 :main          example.runner
                                                 :optimizations :advanced
                                                 :target        :nodejs}}
+            :electron-test      {:source-paths ["src" "test"]
+                                 :compiler     {:output-to     "out/testable.js"
+                                                :main          'example.electron-runner
+                                                :optimizations :simple}}
 
             ;; These cljsbuild configs are for CI testing only.
             :dev-fail           {:source-paths ["src"]

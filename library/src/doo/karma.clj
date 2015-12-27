@@ -6,6 +6,24 @@
             [doo.shell :as shell]
             [doo.utils :as utils]))
 
+;; Copied (and stripped) this code from library/src/doo/core.clj 
+;; TODO: Look into moving the shim creation into the doo.core ns
+(defn runner-path!
+  "Creates a temp file for the given runner resource file."
+  ([runner filename]
+   (runner-path! runner filename {:common? false}))
+  ([runner filename {:keys [common?]}]
+   (letfn [(slurp-resource [res]
+             (slurp (io/resource (str shell/base-dir res))))
+           (add-common [file]
+             (when common?
+               (spit file (slurp-resource "common.js"))))]
+     (.getAbsolutePath
+      (doto (File/createTempFile (name runner) ".js")
+        .deleteOnExit
+        add-common
+        (spit (slurp-resource filename) :append true))))))
+
 ;; ======================================================================
 ;; Karma Clients
 
@@ -67,6 +85,8 @@
      ;; base path
      ;; WARNING: the order of the files is important, don't change it.
      "files" (concat
+               (when (some #{:electron} js-envs)
+                 [(runner-path! :electron-shims "electron-shims.js")])
                (when (= :none (:optimizations compiler-opts))
                  (mapv ->out-dir ["/goog/base.js" "/cljs_deps.js"]))
                [(:output-to compiler-opts)
@@ -87,6 +107,9 @@
   "Creates a file for the given runner resource file in the users dir"
   [js-envs compiler-opts opts]
   {:pre [(some? (:output-dir compiler-opts))]}
+  (when (:debug opts)
+    (utils/debug-log "karma js-envs" js-envs)
+    (utils/debug-log "karma compiler-opts" compiler-opts))
   (let [karma-tmpl (slurp (io/resource (str shell/base-dir "karma.conf.js")))
         karma-opts (cond-> (->karma-opts js-envs compiler-opts)
                      (:install? (:karma opts)) (assoc "singleRun" false))

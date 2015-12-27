@@ -233,7 +233,7 @@ If it does work, file an issue and we'll sort it together!")
 where:
 
   js-env - any of :phantom, :slimer, :node, :rhino, :nashorn,
-                  :chrome, :firefox, :ie, :safari, or :opera
+                  :chrome, :firefox, :ie, :safari, :opera, or :electron
   compiler-opts - the options passed to the ClojureScript when it
                   compiled the script that doo should run
   opts - a map that can contain:
