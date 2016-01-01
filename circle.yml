@@ -27,9 +27,9 @@ test:
     - cd example && lein doo browsers advanced once
     - cd example && lein doo browsers none-test once
     # Electron (uses karma)
-    - cd example && lein doo electron test once
-    - cd example && lein doo electron advanced once
-    - cd example && lein doo electron none-test once
+    - cd example && lein doo electron electron-test once
+    - cd example && lein doo electron electron-advanced once
+    - cd example && lein doo electron electron-none once
     # Phantom
     - cd example && lein doo phantom test once
     - cd example && lein doo phantom advanced once

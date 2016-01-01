@@ -18,7 +18,7 @@
   :doo {:build "test"
         :paths {:slimer "./node_modules/.bin/slimerjs"}
         :alias {:browsers [:chrome :firefox]
-                :all [:browsers :headless :electron]}
+                :all [:browsers :headless]}
         :debug true}
 
   :jvm-opts ["-Xmx1g"]
@@ -53,7 +53,7 @@
                                                 :target        :nodejs}}
             :electron-test      {:source-paths ["src" "test"]
                                  :compiler     {:output-to     "out/testable.js"
-                                                :main          'example.electron-runner
+                                                :main          example.electron-runner
                                                 :optimizations :simple}}
             :electron-none      {:source-paths ["src" "test"]
                                  :compiler     {:output-to     "out/testable.js"
@@ -62,7 +62,7 @@
                                                 :optimizations :none}}
             :electron-advanced  {:source-paths ["src" "test"]
                                  :compiler     {:output-to     "out/testable.js"
-                                                :main          "example.electron-runner"
+                                                :main          example.electron-runner
                                                 :optimizations :advanced
                                                 :externs ["externs/electron.js"]}}
 
