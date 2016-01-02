@@ -4,7 +4,8 @@
   "description": "",
   "dependencies": {},
   "devDependencies": {
-    "karma": "^0.13.14",
+    "electron-prebuilt": "^0.36.2",
+    "karma": "^0.13.16",
     "karma-chrome-launcher": "^0.2.1",
     "karma-cljs-test": "^0.1.0",
     "karma-electron-launcher": "^0.1.0",
