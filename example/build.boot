@@ -9,6 +9,17 @@
 (require
  '[crisptrutski.boot-cljs-test :refer [test-cljs]])
 
+(task-options!
+  test-cljs {:namespaces #{"example.failing-test"
+                           "example.core-test"}})
+
+(deftask electron []
+  (task-options!
+    test-cljs {:namespaces #{"example.electron-test"
+                             "example.core-test"}
+               :js-env     :electron
+               :cljs-opts {:externs ["externs/electron.js"]}}))
+
 (deftask add-tests []
   (set-env! :source-paths #(conj % "test"))
   identity)
