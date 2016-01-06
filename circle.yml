@@ -30,6 +30,9 @@ test:
     - cd example && lein doo electron electron-test once
     - cd example && lein doo electron electron-advanced once
     - cd example && lein doo electron electron-none once
+    - cd example && boot add-tests electron test-cljs -x
+    - cd example && boot add-tests electron test-cljs -x -O simple
+    - cd example && boot add-tests electron test-cljs -x -O advanced
     # Phantom
     - cd example && lein doo phantom test once
     - cd example && lein doo phantom advanced once
@@ -61,6 +64,9 @@ test:
     - cd example && lein doo electron test-fail once && exit 1 || exit 0
     - cd example && lein doo electron advanced-fail once && exit 1 || exit 0
     - cd example && lein doo electron none-test-fail once && exit 1 || exit 0
+    - cd example && boot add-failures electron test-cljs -x && exit 1 || exit 0
+    - cd example && boot add-failures electron test-cljs -x -O simple && exit 1 || exit 0
+    - cd example && boot add-failures electron test-cljs -x -O advanced && exit 1 || exit 0
     # Phantom
     - cd example && lein doo phantom test-fail once && exit 1 || exit 0
     - cd example && lein doo phantom advanced-fail once && exit 1 || exit 0
